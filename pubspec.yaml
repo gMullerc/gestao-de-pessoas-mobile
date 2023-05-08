@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   dropdownfield: ^0.0.2
+  uuid: ^3.0.4
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -59,6 +60,17 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+
+  assets:
+    - assets/images/IGOR.jpeg
+    - assets/images/ISA.jpeg
+    - assets/images/sem_foto.png
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700    
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

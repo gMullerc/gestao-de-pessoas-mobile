@@ -1,10 +1,43 @@
-import 'package:flutter/material.dart';
+import 'package:my_app/model/address.dart';
 import 'package:my_app/model/citizen.dart';
+import 'package:my_app/model/contact.dart';
+import 'package:my_app/model/documents.dart';
+import 'package:my_app/model/professional_documentes.dart';
 
 class Professional extends Citizen {
-  const Professional(
-      {required super.id,
-      required super.name,
-      required super.description,
-      required super.image});
+  late String? _cargo;
+  late String? _remuneracao;
+  late String? _tipoDeProfissional;
+
+  late final ProfessionalDocuments professionalDocuments;
+
+  Professional();
+  Professional.attributes(
+      String _id,
+      String _name,
+      String _dataDeNascimento,
+      String _etnia,
+      String _genero,
+      Contact _contato,
+      Address _endereco,
+      String _image,
+      String _situacaoEscolar,
+      Documents _documentos,
+      String _escolaridade,
+      this._cargo,
+      this._remuneracao,
+      this._tipoDeProfissional,
+      this.professionalDocuments)
+      : super.attributes(
+            _id,
+            _name,
+            _dataDeNascimento,
+            _etnia,
+            _genero,
+            _contato,
+            _endereco,
+            _image,
+            _situacaoEscolar,
+            _documentos,
+            _escolaridade);
 }

@@ -14,10 +14,10 @@ class GestaoDePessoas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      home: Home(),
+      title: 'Gestão de pessoas',
       theme: myTheme,
       color: ThemeColors.primaryColor,
-      home: const Home(),
       debugShowCheckedModeBanner: false,
     );
   }

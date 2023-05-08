@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/components/cardDefault.dart';
 import 'package:my_app/data/citizen_list.dart';
 import 'package:my_app/data/professional_list.dart';
+import 'package:my_app/model/citizen.dart';
 import 'package:my_app/themes/theme_colors.dart';
 
 import '../components/dialog/dialog_citizen.dart';
@@ -26,6 +27,13 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void _handleListCitizenChanged(Citizen value) {
+    setState(() {
+      _citizenList.add(value);
+    });
+    //widget.onEnderecoChanged(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +44,9 @@ class _HomeState extends State<Home> {
             context: context,
             builder: (BuildContext context) {
               if (_isCidadidadaoOrProfessional == 0) {
-                return DialogCitizen();
+                return DialogCitizen(
+                  onListCitizenChanged: _handleListCitizenChanged,
+                );
               } else {
                 return DialogProfessional();
               }
@@ -90,11 +100,11 @@ class _HomeState extends State<Home> {
             delegate: SliverChildBuilderDelegate((context, index) {
               if (_isCidadidadaoOrProfessional == 0) {
                 return CardDefault(
-                  personList: _citizenList,
+                  person: _citizenList[index],
                 );
               } else {
                 return CardDefault(
-                  personList: _professionalList,
+                  person: _professionalList[index],
                 );
               }
             },
