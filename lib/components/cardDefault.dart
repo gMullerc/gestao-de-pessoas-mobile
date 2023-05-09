@@ -9,6 +9,7 @@ import 'card/card_image.dart';
 
 class CardDefault extends StatefulWidget {
   final Citizen person;
+
   CardDefault({Key? key, required this.person}) : super(key: key);
 
   @override
@@ -37,7 +38,7 @@ class _CardDefaultState extends State<CardDefault> {
       },
       focusColor: ThemeColors.primaryFontColor,
       child: SizedBox(
-        height: 250,
+        height: 225,
         child: Card(
           color: ThemeColors.secondaryColor,
           margin: const EdgeInsets.fromLTRB(0, 0, 25, 15),
@@ -48,169 +49,121 @@ class _CardDefaultState extends State<CardDefault> {
               topRight: Radius.circular(25),
             ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CardImage(
-                    image: widget.person.image,
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: Row(
+              children: <Widget>[
+                Expanded(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 15, 8, 15),
-                            child: SizedBox(
-                              width: 199,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    widget.person.name,
-                                    style: TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                        color: ThemeColors.primaryFontColor),
-                                    maxLines: 1,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 15),
-                                    child: SizedBox(
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 30,
-                                            child: Icon(
-                                              Icons.mail,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 160,
-                                            child: Text(
-                                              (widget.person.contato.email
-                                                      .isEmpty)
-                                                  ? _noSignUp("E-mail")
-                                                  : widget.person.contato.email,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: ThemeColors
-                                                      .primaryFontColor),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 15),
-                                    child: SizedBox(
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 30,
-                                            child: Icon(
-                                              Icons.phone,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 160,
-                                            child: Text(
-                                              (widget.person.contato.telefone
-                                                      .isEmpty)
-                                                  ? _noSignUp("Telefone")
-                                                  : widget
-                                                      .person.contato.telefone,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: ThemeColors
-                                                      .primaryFontColor),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 15),
-                                    child: SizedBox(
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 30,
-                                            child: Icon(
-                                              Icons.phone_android,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 160,
-                                            child: Text(
-                                              (widget.person.contato.celular
-                                                      .isEmpty)
-                                                  ? _noSignUp("Celular")
-                                                  : widget
-                                                      .person.contato.celular,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: ThemeColors
-                                                      .primaryFontColor),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor:
-                                            ThemeColors.primaryColor,
-                                        radius: 20,
-                                        child: Text(
-                                          widget.person.id,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color:
-                                                  ThemeColors.primaryFontColor),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                      Container(
+                        height: 115,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
+                          child: CardImage(
+                            image: widget.person.image,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 95,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 10, 0, 5),
+                              child: Text(
+                                widget.person.name,
+                                style: TextStyle(
+                                    color: ThemeColors.primaryFontColor,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                          ),
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 5, 0, 5),
+                              child: Text(
+                                widget.person.documentos.cpf,
+                                style: TextStyle(
+                                    color: ThemeColors.primaryFontColor,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        height: 115,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 20, 15, 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Divider(
+                                color: ThemeColors.materialPrimaryColors,
+                                thickness: 1.5,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: Text(
+                                  widget.person.contato.email,
+                                  style: TextStyle(
+                                      color: ThemeColors.primaryFontColor,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
+                                child: Text(
+                                  widget.person.contato.celular,
+                                  style: TextStyle(
+                                      color: ThemeColors.primaryFontColor,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
+                                child: Text(
+                                  widget.person.contato.telefone,
+                                  style: TextStyle(
+                                      color: ThemeColors.primaryFontColor,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

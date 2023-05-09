@@ -43,6 +43,22 @@ class Person {
     _image = value;
   }
 
+  set person(Person value) {
+    _name = value.name;
+    _contato?.celular = value.contato.celular;
+    _contato?.telefone = value.contato.telefone;
+    _contato?.email = value.contato.email;
+
+    _endereco!.logradouro = value.endereco.logradouro;
+    _endereco!.bairro = value.endereco.bairro;
+    _endereco!.cep = value.endereco.cep;
+    _endereco!.numero = value.endereco.numero;
+    _endereco!.complemento = value.endereco.complemento;
+    _endereco!.uf = value.endereco.uf;
+    _endereco!.cidade = value.endereco.cidade;
+    _endereco!.pais = value.endereco.pais;
+  }
+
   String get id => _id!;
   String get name => _name!;
   String get etnia => _etnia!;

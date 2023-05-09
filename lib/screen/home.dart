@@ -27,6 +27,15 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void _deleteCitizen(Citizen value) {
+    setState(() {
+      int posicao = _citizenList.indexOf(value);
+      _citizenList.removeAt(posicao);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('${value.name} dismissed')));
+    });
+  }
+
   void _handleListCitizenChanged(Citizen value) {
     setState(() {
       _citizenList.add(value);
@@ -53,7 +62,6 @@ class _HomeState extends State<Home> {
             },
           );
         },
-        backgroundColor: ThemeColors.greyColor,
         child: const Icon(
           Icons.add,
           color: Colors.black,
@@ -65,7 +73,6 @@ class _HomeState extends State<Home> {
         onTap: _selectView,
         backgroundColor: ThemeColors.secondaryColor,
         selectedFontSize: 16,
-        selectedItemColor: ThemeColors.primaryFontColor,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -98,9 +105,18 @@ class _HomeState extends State<Home> {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
+              final item = _citizenList[index];
               if (_isCidadidadaoOrProfessional == 0) {
-                return CardDefault(
-                  person: _citizenList[index],
+                return Dismissible(
+                  key: Key(item.id),
+                  direction: DismissDirection.startToEnd,
+                  onDismissed: (direction) {
+                    setState(() {
+                      _deleteCitizen(item);
+                    });
+                  },
+                  background: Container(color: Colors.red),
+                  child: CardDefault(person: item),
                 );
               } else {
                 return CardDefault(

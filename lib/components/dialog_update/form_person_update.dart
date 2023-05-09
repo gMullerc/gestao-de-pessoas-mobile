@@ -49,13 +49,13 @@ class _FormPersonUpdateState extends State<FormPersonUpdate> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.4,
+                width: MediaQuery.of(context).size.width * 0.9,
                 child: TextFormField(
+                  initialValue: widget.citizen.name,
                   decoration: InputDecoration(
                     labelText: 'Nome',
                     labelStyle: TextStyle(color: Colors.amber),
                   ),
-                  initialValue: widget.citizen.name,
                   validator: (value) {
                     if (value == null || value == "") {
                       return _invalidField("Nome");
@@ -68,93 +68,6 @@ class _FormPersonUpdateState extends State<FormPersonUpdate> {
                     });
                   },
                 ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Data de nascimento',
-                    hintText: "DD/mm/YYYY",
-                    labelStyle: TextStyle(color: Colors.amber),
-                  ),
-                  validator: (value) {
-                    if (value == null || value == "") {
-                      return _invalidField("Data de nascimento");
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    setState(() {
-                      widget.citizen.dataDeNascimento = value!;
-                    });
-                  },
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: DropdownButtonFormField<String>(
-                    dropdownColor: ThemeColors.secondaryColor,
-                    value: _selectedEtnia,
-                    items: _etnia.map((String item) {
-                      return DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: TextStyle(color: Colors.amber),
-                        ),
-                      );
-                    }).toList(),
-                    hint: Text("Etnia", style: TextStyle(color: Colors.amber)),
-                    validator: (value) {
-                      if (value == null) {
-                        return _invalidField("Etnia");
-                      }
-                    },
-                    onChanged: (String? selectedItem) {
-                      setState(() {
-                        _selectedEtnia = selectedItem;
-
-                        widget.citizen.etnia = _selectedEtnia!;
-                        print(widget.citizen.etnia);
-                      });
-                    }),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: DropdownButtonFormField<String>(
-                    dropdownColor: ThemeColors.secondaryColor,
-                    value: _selectedGenero,
-                    items: _genero.map((String item) {
-                      return DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: TextStyle(color: Colors.amber),
-                        ),
-                      );
-                    }).toList(),
-                    hint: Text(
-                      "Gênero",
-                      style: TextStyle(color: Colors.amber),
-                      overflow: TextOverflow.fade,
-                    ),
-                    validator: (value) {
-                      if (value == null) {
-                        return _invalidField("Gênero");
-                      }
-                    },
-                    onChanged: (String? selectedItem) {
-                      setState(() {
-                        _selectedGenero = selectedItem;
-                        widget.citizen.genero = _selectedGenero!;
-                        print(widget.citizen.genero);
-                      });
-                    }),
               ),
             ],
           ),

@@ -8,9 +8,12 @@ import 'package:my_app/themes/theme_colors.dart';
 import 'form_person_update.dart';
 
 class DialogCitizenEdit extends StatefulWidget {
-  const DialogCitizenEdit({super.key, required this.citizen});
-
-  final Citizen citizen;
+  const DialogCitizenEdit(
+      {super.key,
+      required this.citizenData,
+      required this.onListCitizenChanged});
+  final Function(Citizen) onListCitizenChanged;
+  final Citizen citizenData;
   @override
   State<DialogCitizenEdit> createState() => _DialogCitizenEditState();
 }
@@ -18,6 +21,12 @@ class DialogCitizenEdit extends StatefulWidget {
 class _DialogCitizenEditState extends State<DialogCitizenEdit> {
   Citizen _citizen = Citizen();
   final _formKey = GlobalKey<FormState>();
+
+  void _handleListChanged(Citizen value) {
+    setState(() {
+      widget.onListCitizenChanged(value);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

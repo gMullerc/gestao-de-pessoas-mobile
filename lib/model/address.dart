@@ -37,6 +37,10 @@ class Address {
     _uf = value;
   }
 
+  set pais(String value) {
+    _pais = value;
+  }
+
   String get logradouro => _logradouro;
   String get cidade => _cidade;
   String get numero => _numero;

@@ -8,9 +8,21 @@ import 'package:my_app/themes/theme_colors.dart';
 import '../components/details/details_citizen_text.dart';
 import '../model/person.dart';
 
-class DetailsPerson extends StatelessWidget {
+class DetailsPerson extends StatefulWidget {
   const DetailsPerson({Key? key, required this.person}) : super(key: key);
   final Citizen person;
+
+  @override
+  State<DetailsPerson> createState() => _DetailsPersonState();
+}
+
+class _DetailsPersonState extends State<DetailsPerson> {
+  void _handleListCitizenChanged(Citizen value) {
+    setState(() {
+      widget.person.person = value;
+    });
+    //widget.onEnderecoChanged(value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +36,8 @@ class DetailsPerson extends StatelessWidget {
               context: context,
               builder: (BuildContext context) {
                 return DialogCitizenEdit(
-                  citizen: person,
+                  citizenData: widget.person,
+                  onListCitizenChanged: _handleListCitizenChanged,
                 );
               },
             );
@@ -59,7 +72,7 @@ class DetailsPerson extends StatelessWidget {
                       ),
                       SizedBox(
                           width: mediaQuery.size.width * 0.7,
-                          child: Text("Detalhar: ${person.id}",
+                          child: Text("Detalhar: ${widget.person.id}",
                               maxLines: 1,
                               style: const TextStyle(
                                   fontSize: 30,
@@ -78,7 +91,6 @@ class DetailsPerson extends StatelessWidget {
                       ThemeColors.primaryColor,
                       ThemeColors.primaryColor,
                       ThemeColors.secondaryColor,
-                      ThemeColors.secondaryColor,
                     ],
                   )),
                   child: Stack(children: [
@@ -92,13 +104,14 @@ class DetailsPerson extends StatelessWidget {
                               backgroundColor: Colors.white,
                               radius: 155,
                               child: Container(
-                                width: 275,
-                                height: 275,
+                                width: 290,
+                                height: 290,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image: AssetImage(person.image))),
+                                        image:
+                                            AssetImage(widget.person.image))),
                               ),
                             ),
                           ],
@@ -108,10 +121,10 @@ class DetailsPerson extends StatelessWidget {
                   ]),
                 ),
                 Container(
-                  child: DetailsPersonText(person: person),
+                  child: DetailsPersonText(person: widget.person),
                 ),
                 Container(
-                  child: DetailsCitizenText(person: person),
+                  child: DetailsCitizenText(person: widget.person),
                 ),
               ],
             ),

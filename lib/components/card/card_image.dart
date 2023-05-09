@@ -11,12 +11,19 @@ class CardImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 235,
-      width: 150,
-      child: Image.asset(
-        image,
-        fit: BoxFit.cover,
-      ),
-    );
+        height: 90,
+        width: 90,
+        child: CircleAvatar(
+          backgroundColor: Colors.white,
+          radius: 155,
+          child: Container(
+            width: 85,
+            height: 85,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    fit: BoxFit.cover, image: AssetImage(image))),
+          ),
+        ));
   }
 }
