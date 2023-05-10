@@ -2,29 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:my_app/components/dialog_update/form_citizen_update.dart';
 
 import 'package:my_app/model/citizen.dart';
+import 'package:my_app/model/professional.dart';
 
 import 'package:my_app/themes/theme_colors.dart';
 
 import 'form_person_update.dart';
 
-class DialogCitizenEdit extends StatefulWidget {
-  const DialogCitizenEdit(
+class DialogProfessionalEdit extends StatefulWidget {
+  const DialogProfessionalEdit(
       {super.key,
-      required this.citizenData,
-      required this.onListCitizenChanged});
-  final Function(Citizen, Citizen) onListCitizenChanged;
-  final Citizen citizenData;
+      required this.professionalData,
+      required this.onListProfessionalChanged});
+  final Function(Professional, Professional) onListProfessionalChanged;
+  final Professional professionalData;
   @override
-  State<DialogCitizenEdit> createState() => _DialogCitizenEditState();
+  State<DialogProfessionalEdit> createState() => _DialogProfessionalEditState();
 }
 
-class _DialogCitizenEditState extends State<DialogCitizenEdit> {
-  Citizen _citizen = Citizen();
+class _DialogProfessionalEditState extends State<DialogProfessionalEdit> {
+  Professional _citizen = Professional();
   final _formKey = GlobalKey<FormState>();
 
-  void _handleListChanged(Citizen value, Citizen oldValue) {
+  void _handleListChanged(Professional value, Professional oldValue) {
     setState(() {
-      widget.onListCitizenChanged(value, oldValue);
+      widget.onListProfessionalChanged(value, oldValue);
     });
   }
 
@@ -57,7 +58,7 @@ class _DialogCitizenEditState extends State<DialogCitizenEdit> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState?.save();
-                        _handleListChanged(_citizen, widget.citizenData);
+                        _handleListChanged(_citizen, widget.professionalData);
                         Navigator.pop(context);
                       }
                     },

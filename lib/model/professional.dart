@@ -8,8 +8,7 @@ class Professional extends Citizen {
   late String? _cargo;
   late String? _remuneracao;
   late String? _tipoDeProfissional;
-
-  late final ProfessionalDocuments professionalDocuments;
+  late ProfessionalDocuments? _professionalDocuments;
 
   Professional();
   Professional.attributes(
@@ -27,7 +26,7 @@ class Professional extends Citizen {
       this._cargo,
       this._remuneracao,
       this._tipoDeProfissional,
-      this.professionalDocuments)
+      this._professionalDocuments)
       : super.attributes(
             _id,
             _name,
@@ -40,4 +39,9 @@ class Professional extends Citizen {
             _situacaoEscolar,
             _documentos,
             _escolaridade);
+
+  String get cargo => _cargo!;
+  String get remuneracao => _remuneracao!;
+  String get tipoDeProfissional => _tipoDeProfissional!;
+  ProfessionalDocuments get professionalDocuments => _professionalDocuments!;
 }

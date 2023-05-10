@@ -14,7 +14,7 @@ class GestaoDePessoas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Home(),
+      home: const Home(),
       title: 'Gestão de pessoas',
       theme: myTheme,
       color: ThemeColors.primaryColor,

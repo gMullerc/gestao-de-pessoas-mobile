@@ -8,19 +8,22 @@ import 'package:my_app/themes/theme_colors.dart';
 import '../components/details/details_citizen_text.dart';
 import '../model/person.dart';
 
-class DetailsPerson extends StatefulWidget {
-  const DetailsPerson({Key? key, required this.person}) : super(key: key);
+class DetailsCitizen extends StatefulWidget {
+  const DetailsCitizen(
+      {Key? key, required this.person, required this.onListCitizenChanged})
+      : super(key: key);
   final Citizen person;
-
+  final Function(Citizen, Citizen) onListCitizenChanged;
   @override
-  State<DetailsPerson> createState() => _DetailsPersonState();
+  State<DetailsCitizen> createState() => _DetailsCitizenState();
 }
 
-class _DetailsPersonState extends State<DetailsPerson> {
-  void _handleListCitizenChanged(Citizen value) {
+class _DetailsCitizenState extends State<DetailsCitizen> {
+  void _handleListCitizenChanged(Citizen value, Citizen oldValue) {
     setState(() {
-      widget.person.person = value;
+      widget.onListCitizenChanged(value, oldValue);
     });
+
     //widget.onEnderecoChanged(value);
   }
 

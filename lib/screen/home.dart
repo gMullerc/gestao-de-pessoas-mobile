@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/cardDefault.dart';
+import 'package:my_app/components/card_citizen.dart';
+import 'package:my_app/components/card_professional.dart';
 import 'package:my_app/data/citizen_list.dart';
 import 'package:my_app/data/professional_list.dart';
 import 'package:my_app/model/citizen.dart';
+import 'package:my_app/model/documents.dart';
 import 'package:my_app/themes/theme_colors.dart';
 
 import '../components/dialog/dialog_citizen.dart';
@@ -24,6 +26,18 @@ class _HomeState extends State<Home> {
   _selectView(int value) {
     setState(() {
       _isCidadidadaoOrProfessional = value;
+    });
+  }
+
+  void _updateCitizen(Citizen value, Citizen oldValue) {
+    setState(() {
+      Citizen cidadao =
+          _citizenList.firstWhere((element) => element == oldValue);
+
+      cidadao.name = value.name;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('${cidadao.documentos.cpf} atualizado')));
     });
   }
 
@@ -105,22 +119,34 @@ class _HomeState extends State<Home> {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
-              final item = _citizenList[index];
+              final citizen = _citizenList[index];
+              final professional = _professionalList[index];
               if (_isCidadidadaoOrProfessional == 0) {
                 return Dismissible(
-                  key: Key(item.id),
+                  key: Key(citizen.id),
                   direction: DismissDirection.startToEnd,
                   onDismissed: (direction) {
                     setState(() {
-                      _deleteCitizen(item);
+                      _deleteCitizen(citizen);
                     });
                   },
                   background: Container(color: Colors.red),
-                  child: CardDefault(person: item),
+                  child: CardCitizen(
+                      person: citizen, onListCitizenUpdate: _updateCitizen),
                 );
               } else {
-                return CardDefault(
-                  person: _professionalList[index],
+                return Dismissible(
+                  key: Key(professional.id),
+                  direction: DismissDirection.startToEnd,
+                  onDismissed: (direction) {
+                    setState(() {
+                      _deleteCitizen(professional);
+                    });
+                  },
+                  background: Container(color: Colors.red),
+                  child: CardProfessional(
+                      person: professional,
+                      onListCitizenUpdate: _updateCitizen),
                 );
               }
             },

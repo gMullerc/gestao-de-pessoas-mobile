@@ -2,32 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:my_app/model/citizen.dart';
 import 'package:my_app/model/person.dart';
 import 'package:my_app/model/professional.dart';
-import 'package:my_app/screen/details_person.dart';
+import 'package:my_app/screen/details_citizen.dart';
+import 'package:my_app/screen/details_professional.dart';
 import 'package:my_app/themes/theme_colors.dart';
 
 import 'card/card_image.dart';
 
-class CardDefault extends StatefulWidget {
-  final Citizen person;
-
-  CardDefault({Key? key, required this.person}) : super(key: key);
+class CardProfessional extends StatefulWidget {
+  final Professional person;
+  final Function(Professional, Professional) onListCitizenUpdate;
+  CardProfessional(
+      {Key? key, required this.person, required this.onListCitizenUpdate})
+      : super(key: key);
 
   @override
-  _CardDefaultState createState() => _CardDefaultState();
+  _CardProfessionalState createState() => _CardProfessionalState();
 }
 
-class _CardDefaultState extends State<CardDefault> {
+class _CardProfessionalState extends State<CardProfessional> {
   String _noSignUp(String value) {
     return value + " sem cadastro";
+  }
+
+  void _updateCitizen(Professional value, Professional oldValue) {
+    setState(() {
+      widget.onListCitizenUpdate(value, oldValue);
+    });
   }
 
   _openDetailsPerson(BuildContext context) {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => DetailsPerson(
-                  person: widget.person,
-                )));
+            builder: (context) => DetailsProfessional(
+                person: widget.person,
+                onListProfessionalChanged: _updateCitizen)));
   }
 
   @override
@@ -76,7 +85,7 @@ class _CardDefaultState extends State<CardDefault> {
                               padding: const EdgeInsets.fromLTRB(20, 10, 0, 5),
                               child: Text(
                                 widget.person.name,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: ThemeColors.primaryFontColor,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
@@ -88,7 +97,7 @@ class _CardDefaultState extends State<CardDefault> {
                               padding: const EdgeInsets.fromLTRB(20, 5, 0, 5),
                               child: Text(
                                 widget.person.documentos.cpf,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: ThemeColors.primaryFontColor,
                                     fontSize: 13,
                                     fontWeight: FontWeight.bold),
@@ -115,7 +124,7 @@ class _CardDefaultState extends State<CardDefault> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Divider(
+                              const Divider(
                                 color: ThemeColors.materialPrimaryColors,
                                 thickness: 1.5,
                               ),
@@ -123,7 +132,7 @@ class _CardDefaultState extends State<CardDefault> {
                                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                                 child: Text(
                                   widget.person.contato.email,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: ThemeColors.primaryFontColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold),
@@ -135,7 +144,7 @@ class _CardDefaultState extends State<CardDefault> {
                                 padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
                                 child: Text(
                                   widget.person.contato.celular,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: ThemeColors.primaryFontColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold),
@@ -147,7 +156,43 @@ class _CardDefaultState extends State<CardDefault> {
                                 padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
                                 child: Text(
                                   widget.person.contato.telefone,
-                                  style: TextStyle(
+                                  style: const TextStyle(
+                                      color: ThemeColors.primaryFontColor,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 90,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 20, 15, 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: Text(
+                                  widget.person.cargo,
+                                  style: const TextStyle(
+                                      color: ThemeColors.primaryFontColor,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
+                                child: Text(
+                                  widget.person.tipoDeProfissional,
+                                  style: const TextStyle(
                                       color: ThemeColors.primaryFontColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold),

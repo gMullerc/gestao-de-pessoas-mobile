@@ -1,6 +1,7 @@
 class ProfessionalDocuments {
-  late final String pis;
-  late final String carteiraDeTrabalho;
+  late String pis;
+  late String carteiraDeTrabalho;
 
   ProfessionalDocuments();
+  ProfessionalDocuments.attributes(this.pis, this.carteiraDeTrabalho);
 }
