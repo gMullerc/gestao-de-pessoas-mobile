@@ -3,30 +3,25 @@ import 'package:my_app/components/dialog/form_citizen.dart';
 import 'package:my_app/components/dialog/form_person.dart';
 
 import 'package:my_app/model/citizen.dart';
+import 'package:my_app/model/citizen_list.dart';
 
 import 'package:my_app/themes/theme_colors.dart';
+import 'package:provider/provider.dart';
 
 class DialogCitizen extends StatefulWidget {
-  const DialogCitizen({super.key, required this.onListCitizenChanged});
-
-  final Function(Citizen) onListCitizenChanged;
+  const DialogCitizen({super.key});
 
   @override
   State<DialogCitizen> createState() => _DialogCitizenState();
 }
 
 class _DialogCitizenState extends State<DialogCitizen> {
-  Citizen _citizen = Citizen();
   final _formKey = GlobalKey<FormState>();
-
-  void _handleListChanged(Citizen value) {
-    setState(() {
-      widget.onListCitizenChanged(value);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+    final CitizenList citizen = Provider.of(context);
+    final Citizen newCitizen = Provider.of(context);
     return Dialog.fullscreen(
       backgroundColor: ThemeColors.primaryColor,
       child: Container(
@@ -39,8 +34,8 @@ class _DialogCitizenState extends State<DialogCitizen> {
                 Form(
                   key: _formKey,
                   child: Column(children: [
-                    FormPerson(citizen: _citizen),
-                    FormCitizen(citizen: _citizen),
+                    FormPerson(citizen: newCitizen),
+                    FormCitizen(citizen: newCitizen),
                   ]),
                 ),
                 const SizedBox(height: 16.0),
@@ -55,7 +50,8 @@ class _DialogCitizenState extends State<DialogCitizen> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState?.save();
-                        _handleListChanged(_citizen);
+
+                        citizen.addCitizen(newCitizen);
                         Navigator.pop(context);
                       }
                     },

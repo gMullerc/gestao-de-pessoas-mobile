@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/model/citizen_provider.dart';
 import 'package:my_app/model/contact.dart';
+import 'package:provider/provider.dart';
+
+import '../../themes/theme_colors.dart';
 
 class FormContactUpdate extends StatefulWidget {
-  const FormContactUpdate({super.key, required this.onContactChanged});
-  final Function(Contact) onContactChanged;
+  const FormContactUpdate({
+    super.key,
+  });
   @override
   State<FormContactUpdate> createState() => _FormContactUpdateState();
 }
 
 class _FormContactUpdateState extends State<FormContactUpdate> {
-  Contact _contact = Contact();
-
-  void _handleEnderecoChanged(Contact value) {
-    setState(() {
-      widget.onContactChanged(value);
-    });
-  }
-
   String _invalidField(String value) {
     return value + " é necessário";
   }
 
   @override
   Widget build(BuildContext context) {
+    final citizenProvider = Provider.of<CidadaoProvider>(context);
     return Column(
       children: [
         Column(children: [
@@ -38,12 +36,11 @@ class _FormContactUpdateState extends State<FormContactUpdate> {
                     }
                     return null;
                   },
+                  initialValue: citizenProvider.citizen.contato.email,
                   onChanged: (value) {
-                    setState(() {
-                      _contact.email = value;
-                      _handleEnderecoChanged(_contact);
-                    });
+                    citizenProvider.citizen.contato.email = value;
                   },
+                  style: const TextStyle(color: ThemeColors.primaryFontColor),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       labelText: 'E-mail',
@@ -65,12 +62,11 @@ class _FormContactUpdateState extends State<FormContactUpdate> {
                     }
                     return null;
                   },
+                  initialValue: citizenProvider.citizen.contato.celular,
                   onSaved: (value) {
-                    setState(() {
-                      _contact.celular = value!;
-                      _handleEnderecoChanged(_contact);
-                    });
+                    citizenProvider.citizen.contato.celular = value!;
                   },
+                  style: const TextStyle(color: ThemeColors.primaryFontColor),
                   decoration: InputDecoration(
                       labelText: 'Celular',
                       hintText: "11 90000-0000",
@@ -80,11 +76,10 @@ class _FormContactUpdateState extends State<FormContactUpdate> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: TextFormField(
+                  style: const TextStyle(color: ThemeColors.primaryFontColor),
+                  initialValue: citizenProvider.citizen.contato.telefone,
                   onChanged: (value) {
-                    setState(() {
-                      _contact.telefone = value;
-                      _handleEnderecoChanged(_contact);
-                    });
+                    citizenProvider.citizen.contato.telefone = value;
                   },
                   decoration: InputDecoration(
                       labelText: 'Telefone',

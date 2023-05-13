@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:my_app/model/address.dart';
 import 'package:my_app/model/contact.dart';
 import 'package:my_app/model/documents.dart';
 import 'package:my_app/model/person.dart';
+import 'package:provider/provider.dart';
 
 class Citizen extends Person {
-  late String? _situacaoEscolar;
-  late String? _escolaridade;
+  late String? _situacaoEscolar = "";
+  late String? _escolaridade = "";
   late Documents? _documentos;
 
   Citizen();
@@ -38,14 +40,4 @@ class Citizen extends Person {
   String get situacaoEscolar => _situacaoEscolar!;
   String get escolaridade => _escolaridade!;
   Documents get documentos => _documentos!;
-
-  @override
-  String toString() {
-    // TODO: implement toString
-    return _documentos!.cpf +
-        "\n" +
-        _documentos!.rg +
-        "\n" +
-        _documentos!.certidaoDeNascimento;
-  }
 }

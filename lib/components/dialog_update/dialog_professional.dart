@@ -43,7 +43,7 @@ class _DialogProfessionalEditState extends State<DialogProfessionalEdit> {
                 Form(
                   key: _formKey,
                   child: Column(children: [
-                    FormPersonUpdate(citizen: _citizen),
+                    //  FormPersonUpdate(citizen: _citizen),
                   ]),
                 ),
                 const SizedBox(height: 16.0),

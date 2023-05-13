@@ -5,9 +5,9 @@ import 'package:my_app/model/documents.dart';
 import 'package:my_app/model/professional_documentes.dart';
 
 class Professional extends Citizen {
-  late String? _cargo;
-  late String? _remuneracao;
-  late String? _tipoDeProfissional;
+  late String? _cargo = "";
+  late String? _remuneracao = "";
+  late String? _tipoDeProfissional = "";
   late ProfessionalDocuments? _professionalDocuments;
 
   Professional();
@@ -39,6 +39,22 @@ class Professional extends Citizen {
             _situacaoEscolar,
             _documentos,
             _escolaridade);
+
+  set cargo(String value) {
+    _cargo = value;
+  }
+
+  set remuneracao(String value) {
+    _remuneracao = value;
+  }
+
+  set tipoDeProfissional(String value) {
+    _tipoDeProfissional = value;
+  }
+
+  set professionalDocuments(ProfessionalDocuments value) {
+    _professionalDocuments = value;
+  }
 
   String get cargo => _cargo!;
   String get remuneracao => _remuneracao!;

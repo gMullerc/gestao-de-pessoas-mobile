@@ -1,7 +1,7 @@
 class Documents {
-  late String _cpf = "";
-  late String _rg = "";
-  late String _certidaoDeNascimento = "";
+  late String _cpf;
+  late String _rg;
+  late String _certidaoDeNascimento;
 
   Documents();
   Documents.attributes(this._cpf, this._rg, this._certidaoDeNascimento);

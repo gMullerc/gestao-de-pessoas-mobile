@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/model/citizen_provider.dart';
 import 'package:my_app/model/documents.dart';
+import 'package:my_app/themes/theme_colors.dart';
+import 'package:provider/provider.dart';
 
 class FormDocumentsUpdate extends StatefulWidget {
-  const FormDocumentsUpdate({super.key, required this.onContactChanged});
-  final Function(Documents) onContactChanged;
+  const FormDocumentsUpdate({super.key});
 
   @override
   State<FormDocumentsUpdate> createState() => _FormDocumentsUpdateState();
 }
 
 class _FormDocumentsUpdateState extends State<FormDocumentsUpdate> {
-  Documents _documents = Documents();
-
-  void _handleEnderecoChanged(Documents value) {
-    setState(() {
-      widget.onContactChanged(value);
-    });
-  }
-
   String _invalidField(String value) {
     return value + " é necessário";
   }
 
   @override
   Widget build(BuildContext context) {
+    final citizenProvider = Provider.of<CidadaoProvider>(context);
     return Column(
       children: [
         Column(children: [
@@ -40,15 +35,13 @@ class _FormDocumentsUpdateState extends State<FormDocumentsUpdate> {
                     return null;
                   },
                   onSaved: (value) {
-                    setState(() {
-                      _documents.cpf = value!;
-                      _handleEnderecoChanged(_documents);
-                    });
+                    citizenProvider.citizen.documentos.cpf = value!;
                   },
+                  initialValue: citizenProvider.citizen.documentos.cpf,
+                  style: const TextStyle(color: ThemeColors.primaryFontColor),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       labelText: 'CPF',
-                      hintText: "000.000.000-00",
                       labelStyle: TextStyle(color: Colors.amber)),
                 ),
               ),
@@ -67,11 +60,10 @@ class _FormDocumentsUpdateState extends State<FormDocumentsUpdate> {
                     return null;
                   },
                   onSaved: (value) {
-                    setState(() {
-                      _documents.rg = value!;
-                      _handleEnderecoChanged(_documents);
-                    });
+                    citizenProvider.citizen.documentos.rg = value!;
                   },
+                  style: const TextStyle(color: ThemeColors.primaryFontColor),
+                  initialValue: citizenProvider.citizen.documentos.rg,
                   decoration: InputDecoration(
                       labelText: 'RG',
                       hintText: "00.000.000-0",
@@ -87,12 +79,13 @@ class _FormDocumentsUpdateState extends State<FormDocumentsUpdate> {
                     }
                     return null;
                   },
+                  initialValue:
+                      citizenProvider.citizen.documentos.certidaoDeNascimento,
                   onSaved: (value) {
-                    setState(() {
-                      _documents.certidaoDeNascimento = value!;
-                      _handleEnderecoChanged(_documents);
-                    });
+                    citizenProvider.citizen.documentos.certidaoDeNascimento =
+                        value!;
                   },
+                  style: const TextStyle(color: ThemeColors.primaryFontColor),
                   decoration: InputDecoration(
                       labelText: 'Certidão de Nascimento',
                       hintText: "1234/1234",

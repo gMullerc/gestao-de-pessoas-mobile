@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:my_app/model/address.dart';
 import 'package:my_app/model/contact.dart';
+import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
-class Person {
+class Person with ChangeNotifier {
   late String? _id = Uuid().v1();
   late String? _name = "";
   late String? _dataDeNascimento = "";

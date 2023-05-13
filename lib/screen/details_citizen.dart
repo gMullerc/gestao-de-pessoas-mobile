@@ -4,26 +4,19 @@ import 'package:my_app/components/dialog_update/dialog_citizen_edit.dart';
 import 'package:my_app/model/citizen.dart';
 import 'package:my_app/model/professional.dart';
 import 'package:my_app/themes/theme_colors.dart';
+import 'package:provider/provider.dart';
 
 import '../components/details/details_citizen_text.dart';
+import '../model/citizen_provider.dart';
 import '../model/person.dart';
 
 class DetailsCitizen extends StatefulWidget {
-  const DetailsCitizen(
-      {Key? key, required this.person, required this.onListCitizenChanged})
-      : super(key: key);
-  final Citizen person;
-  final Function(Citizen, Citizen) onListCitizenChanged;
   @override
   State<DetailsCitizen> createState() => _DetailsCitizenState();
 }
 
 class _DetailsCitizenState extends State<DetailsCitizen> {
   void _handleListCitizenChanged(Citizen value, Citizen oldValue) {
-    setState(() {
-      widget.onListCitizenChanged(value, oldValue);
-    });
-
     //widget.onEnderecoChanged(value);
   }
 
@@ -32,16 +25,14 @@ class _DetailsCitizenState extends State<DetailsCitizen> {
     final mediaQuery = MediaQuery.of(context);
     double statusBarHeight = MediaQuery.of(context).padding.top + 16;
 
+    final cidadaoProvider = Provider.of<CidadaoProvider>(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return DialogCitizenEdit(
-                  citizenData: widget.person,
-                  onListCitizenChanged: _handleListCitizenChanged,
-                );
+                return DialogCitizenEdit();
               },
             );
           },
@@ -75,7 +66,7 @@ class _DetailsCitizenState extends State<DetailsCitizen> {
                       ),
                       SizedBox(
                           width: mediaQuery.size.width * 0.7,
-                          child: Text("Detalhar: ${widget.person.id}",
+                          child: Text("Detalhar: ${cidadaoProvider.citizen.id}",
                               maxLines: 1,
                               style: const TextStyle(
                                   fontSize: 30,
@@ -113,8 +104,8 @@ class _DetailsCitizenState extends State<DetailsCitizen> {
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image:
-                                            AssetImage(widget.person.image))),
+                                        image: AssetImage(
+                                            cidadaoProvider.citizen.image))),
                               ),
                             ),
                           ],
@@ -123,12 +114,8 @@ class _DetailsCitizenState extends State<DetailsCitizen> {
                     ),
                   ]),
                 ),
-                Container(
-                  child: DetailsPersonText(person: widget.person),
-                ),
-                Container(
-                  child: DetailsCitizenText(person: widget.person),
-                ),
+                const DetailsPersonText(),
+                const DetailsCitizenText(),
               ],
             ),
           )),

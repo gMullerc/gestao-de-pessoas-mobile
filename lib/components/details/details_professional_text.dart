@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/model/citizen.dart';
+import 'package:my_app/model/professional.dart';
 import 'package:my_app/themes/theme_colors.dart';
-import 'package:provider/provider.dart';
 
-import '../../model/citizen_provider.dart';
 import '../../model/person.dart';
 
-class DetailsCitizenText extends StatelessWidget {
-  const DetailsCitizenText({Key? key}) : super(key: key);
+class DetailsProfessionalText extends StatelessWidget {
+  const DetailsProfessionalText({Key? key, required this.person})
+      : super(key: key);
+  final Professional person;
 
   @override
   Widget build(BuildContext context) {
-    final citizenProvider = Provider.of<CidadaoProvider>(context);
     final mediaQuery = MediaQuery.of(context);
     return Container(
       child: Column(
@@ -25,7 +25,7 @@ class DetailsCitizenText extends StatelessWidget {
                   width: mediaQuery.size.width * 0.5,
                   child: RichText(
                     text: TextSpan(
-                      text: 'Situação Escolar: ',
+                      text: 'Cargo: ',
                       style: TextStyle(
                         fontSize: 15,
                         fontFamily: "Montserrat",
@@ -34,7 +34,7 @@ class DetailsCitizenText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${citizenProvider.citizen.situacaoEscolar}',
+                          text: '${person.cargo}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -47,7 +47,7 @@ class DetailsCitizenText extends StatelessWidget {
                   width: mediaQuery.size.width * 0.3,
                   child: RichText(
                     text: TextSpan(
-                      text: 'Escolaridade: ',
+                      text: 'Tipo de Prof.: ',
                       style: TextStyle(
                         fontSize: 15,
                         fontFamily: "Montserrat",
@@ -56,7 +56,7 @@ class DetailsCitizenText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${citizenProvider.citizen.escolaridade}',
+                          text: '${person.tipoDeProfissional}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -77,7 +77,7 @@ class DetailsCitizenText extends StatelessWidget {
                   width: mediaQuery.size.width * 0.4,
                   child: RichText(
                     text: TextSpan(
-                      text: 'CPF: ',
+                      text: 'Remuneração: ',
                       style: TextStyle(
                         fontSize: 15,
                         fontFamily: "Montserrat",
@@ -86,7 +86,7 @@ class DetailsCitizenText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${citizenProvider.citizen.documentos.cpf}',
+                          text: '${person.remuneracao}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -99,7 +99,7 @@ class DetailsCitizenText extends StatelessWidget {
                   width: mediaQuery.size.width * 0.4,
                   child: RichText(
                     text: TextSpan(
-                      text: 'RG: ',
+                      text: 'pis: ',
                       style: TextStyle(
                         fontSize: 15,
                         fontFamily: "Montserrat",
@@ -108,7 +108,7 @@ class DetailsCitizenText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${citizenProvider.citizen.documentos.rg}',
+                          text: '${person.professionalDocuments.pis}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -129,7 +129,7 @@ class DetailsCitizenText extends StatelessWidget {
                   width: mediaQuery.size.width * 0.9,
                   child: RichText(
                     text: TextSpan(
-                      text: 'Certidão de Nascimento: ',
+                      text: 'Carteira de trabalho: ',
                       style: TextStyle(
                         fontSize: 15,
                         fontFamily: "Montserrat",
@@ -139,7 +139,7 @@ class DetailsCitizenText extends StatelessWidget {
                       children: [
                         TextSpan(
                           text:
-                              '${citizenProvider.citizen.documentos.certidaoDeNascimento}',
+                              '${person.professionalDocuments.carteiraDeTrabalho}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),

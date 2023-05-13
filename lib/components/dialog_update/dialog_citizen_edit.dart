@@ -4,32 +4,26 @@ import 'package:my_app/components/dialog_update/form_citizen_update.dart';
 import 'package:my_app/model/citizen.dart';
 
 import 'package:my_app/themes/theme_colors.dart';
+import 'package:provider/provider.dart';
 
+import '../../model/citizen_provider.dart';
 import 'form_person_update.dart';
 
 class DialogCitizenEdit extends StatefulWidget {
-  const DialogCitizenEdit(
-      {super.key,
-      required this.citizenData,
-      required this.onListCitizenChanged});
-  final Function(Citizen, Citizen) onListCitizenChanged;
-  final Citizen citizenData;
+  const DialogCitizenEdit({
+    super.key,
+  });
+
   @override
   State<DialogCitizenEdit> createState() => _DialogCitizenEditState();
 }
 
 class _DialogCitizenEditState extends State<DialogCitizenEdit> {
-  Citizen _citizen = Citizen();
   final _formKey = GlobalKey<FormState>();
-
-  void _handleListChanged(Citizen value, Citizen oldValue) {
-    setState(() {
-      widget.onListCitizenChanged(value, oldValue);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+    final citizenProvider = Provider.of<CidadaoProvider>(context);
     return Dialog.fullscreen(
       backgroundColor: ThemeColors.primaryColor,
       child: Container(
@@ -42,7 +36,7 @@ class _DialogCitizenEditState extends State<DialogCitizenEdit> {
                 Form(
                   key: _formKey,
                   child: Column(children: [
-                    FormPersonUpdate(citizen: _citizen),
+                    FormPersonUpdate(),
                   ]),
                 ),
                 const SizedBox(height: 16.0),
@@ -57,7 +51,7 @@ class _DialogCitizenEditState extends State<DialogCitizenEdit> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState?.save();
-                        _handleListChanged(_citizen, widget.citizenData);
+                        citizenProvider.updateCitizen(citizenProvider.citizen);
                         Navigator.pop(context);
                       }
                     },

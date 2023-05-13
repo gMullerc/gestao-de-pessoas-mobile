@@ -5,7 +5,7 @@ import 'package:my_app/model/documents.dart';
 
 var citizenList = [
   Citizen.attributes(
-      "1",
+      "3",
       "Igor Birilosh da silva",
       "01/08/2022",
       "MASCULINO",
@@ -18,7 +18,7 @@ var citizenList = [
       Documents.attributes("314.488.896-85", "55.987.787-X", "12344/8454"),
       "MEDIO"),
   Citizen.attributes(
-      "2",
+      "4",
       "Isabela Birilosh da silva",
       "01/08/2022",
       "FEMININO",

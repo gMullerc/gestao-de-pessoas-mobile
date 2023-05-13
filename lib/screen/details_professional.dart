@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/components/details/details_person_text.dart';
-import 'package:my_app/components/dialog_update/dialog_citizen_edit.dart';
+import 'package:my_app/components/details/details_professional_text.dart';
+
 import 'package:my_app/components/dialog_update/dialog_professional.dart';
-import 'package:my_app/model/citizen.dart';
+
 import 'package:my_app/model/professional.dart';
 import 'package:my_app/themes/theme_colors.dart';
 
 import '../components/details/details_citizen_text.dart';
-import '../model/person.dart';
 
 class DetailsProfessional extends StatefulWidget {
   const DetailsProfessional(
@@ -126,10 +126,13 @@ class _DetailsProfessionalState extends State<DetailsProfessional> {
                   ]),
                 ),
                 Container(
-                  child: DetailsPersonText(person: widget.person),
+                  child: DetailsPersonText(),
                 ),
                 Container(
-                  child: DetailsCitizenText(person: widget.person),
+                  child: DetailsCitizenText(),
+                ),
+                Container(
+                  child: DetailsProfessionalText(person: widget.person),
                 ),
               ],
             ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/model/citizen.dart';
+import 'package:my_app/model/citizen_provider.dart';
 import 'package:my_app/model/person.dart';
 import 'package:my_app/model/professional.dart';
 import 'package:my_app/screen/details_citizen.dart';
 import 'package:my_app/themes/theme_colors.dart';
+import 'package:provider/provider.dart';
 
 import 'card/card_image.dart';
 
@@ -29,19 +31,14 @@ class _CardCitizenState extends State<CardCitizen> {
     });
   }
 
-  _openDetailsPerson(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => DetailsCitizen(
-                person: widget.person, onListCitizenChanged: _updateCitizen)));
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        _openDetailsPerson(context);
+        Provider.of<CidadaoProvider>(context, listen: false)
+            .setCidadao(widget.person);
+
+        Navigator.of(context).pushNamed("/citizen-detail");
       },
       focusColor: ThemeColors.primaryFontColor,
       child: SizedBox(

@@ -4,11 +4,15 @@ import 'package:my_app/components/card_professional.dart';
 import 'package:my_app/data/citizen_list.dart';
 import 'package:my_app/data/professional_list.dart';
 import 'package:my_app/model/citizen.dart';
-import 'package:my_app/model/documents.dart';
+
+import 'package:my_app/model/professional.dart';
+import 'package:my_app/model/professional_list.dart';
 import 'package:my_app/themes/theme_colors.dart';
+import 'package:provider/provider.dart';
 
 import '../components/dialog/dialog_citizen.dart';
 import '../components/dialog/dialog_professional.dart';
+import '../model/citizen_list.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -41,24 +45,30 @@ class _HomeState extends State<Home> {
     });
   }
 
-  void _deleteCitizen(Citizen value) {
+  void _updateProfessional(Professional value, Professional oldValue) {
     setState(() {
-      int posicao = _citizenList.indexOf(value);
-      _citizenList.removeAt(posicao);
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('${value.name} dismissed')));
+      Professional professional =
+          _professionalList.firstWhere((element) => element == oldValue);
+
+      professional.name = value.name;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('${professional.documentos.cpf} atualizado')));
     });
   }
 
-  void _handleListCitizenChanged(Citizen value) {
+  void _handleListProfessionalChanged(Professional value) {
     setState(() {
-      _citizenList.add(value);
+      _professionalList.add(value);
+      print(value.cargo + value.remuneracao);
     });
     //widget.onEnderecoChanged(value);
   }
 
   @override
   Widget build(BuildContext context) {
+    final CitizenList _citizen = Provider.of(context);
+    final ProfessionalList _professional = Provider.of(context);
     return Scaffold(
       backgroundColor: ThemeColors.primaryColor,
       floatingActionButton: FloatingActionButton(
@@ -67,11 +77,12 @@ class _HomeState extends State<Home> {
             context: context,
             builder: (BuildContext context) {
               if (_isCidadidadaoOrProfessional == 0) {
-                return DialogCitizen(
-                  onListCitizenChanged: _handleListCitizenChanged,
-                );
+                return ChangeNotifierProvider(
+                    create: (_) => Citizen(), child: DialogCitizen());
               } else {
-                return DialogProfessional();
+                return DialogProfessional(
+                  onListProfessionalChanged: _handleListProfessionalChanged,
+                );
               }
             },
           );
@@ -117,43 +128,42 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              final citizen = _citizenList[index];
-              final professional = _professionalList[index];
-              if (_isCidadidadaoOrProfessional == 0) {
+          if (_isCidadidadaoOrProfessional == 0)
+            SliverList(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final Citizen citizen = _citizen.items[index];
                 return Dismissible(
                   key: Key(citizen.id),
                   direction: DismissDirection.startToEnd,
                   onDismissed: (direction) {
-                    setState(() {
-                      _deleteCitizen(citizen);
-                    });
+                    _citizenList.removeAt(_citizenList.indexOf(citizen));
                   },
                   background: Container(color: Colors.red),
                   child: CardCitizen(
                       person: citizen, onListCitizenUpdate: _updateCitizen),
                 );
-              } else {
+              }, childCount: _citizenList.length),
+            )
+          else
+            SliverList(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final Professional professional = _professional.items[index];
+
                 return Dismissible(
                   key: Key(professional.id),
                   direction: DismissDirection.startToEnd,
                   onDismissed: (direction) {
-                    setState(() {
-                      _deleteCitizen(professional);
-                    });
+                    _professionalList
+                        .removeAt(_professionalList.indexOf(professional));
                   },
-                  background: Container(color: Colors.red),
+                  background:
+                      Container(color: Color.fromARGB(255, 112, 108, 108)),
                   child: CardProfessional(
                       person: professional,
-                      onListCitizenUpdate: _updateCitizen),
+                      onListCitizenUpdate: _updateProfessional),
                 );
-              }
-            },
-                childCount: (_isCidadidadaoOrProfessional == 0)
-                    ? _citizenList.length
-                    : _professionalList.length),
-          )
+              }, childCount: _professionalList.length),
+            )
         ],
       ),
     );

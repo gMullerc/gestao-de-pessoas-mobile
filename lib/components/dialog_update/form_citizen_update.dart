@@ -99,9 +99,7 @@ class _FormCitizenUpdateState extends State<FormCitizenUpdate> {
               ),
             ],
           ),
-          FormDocumentsUpdate(
-            onContactChanged: _handleDocumentsChanged,
-          )
+          FormDocumentsUpdate()
         ]),
       ],
     );
