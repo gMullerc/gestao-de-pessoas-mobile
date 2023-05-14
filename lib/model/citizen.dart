@@ -25,6 +25,21 @@ class Citizen extends Person {
       this._escolaridade)
       : super.attributes(_id, _name, _dataDeNascimento, _etnia, _genero,
             _contato, _endereco, _image);
+
+  factory Citizen.fromJson(Map<String, dynamic> json) {
+    return Citizen.attributes(
+      json['id'],
+      json['nome'],
+      json['dataDeNascimento'],
+      json['etnia'],
+      json['genero'],
+      json['contato'],
+      json['endereco'], "assets/images/ISA.jpeg",
+      json['situacaoEscolar'],
+      json['documentos'], json['escolaridade'],
+      // ... outros campos
+    );
+  }
   set situacaoEscolar(String value) {
     _situacaoEscolar = value;
   }

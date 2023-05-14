@@ -1,49 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/model/citizen.dart';
-import 'package:my_app/model/person.dart';
 import 'package:my_app/model/professional.dart';
-import 'package:my_app/screen/details_citizen.dart';
-import 'package:my_app/screen/details_professional.dart';
+import 'package:my_app/model/professional_provider.dart';
 import 'package:my_app/themes/theme_colors.dart';
+import 'package:provider/provider.dart';
 
 import 'card/card_image.dart';
 
 class CardProfessional extends StatefulWidget {
   final Professional person;
-  final Function(Professional, Professional) onListCitizenUpdate;
-  CardProfessional(
-      {Key? key, required this.person, required this.onListCitizenUpdate})
-      : super(key: key);
+
+  CardProfessional({Key? key, required this.person}) : super(key: key);
 
   @override
   _CardProfessionalState createState() => _CardProfessionalState();
 }
 
 class _CardProfessionalState extends State<CardProfessional> {
-  String _noSignUp(String value) {
-    return value + " sem cadastro";
-  }
-
-  void _updateCitizen(Professional value, Professional oldValue) {
-    setState(() {
-      widget.onListCitizenUpdate(value, oldValue);
-    });
-  }
-
-  _openDetailsPerson(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => DetailsProfessional(
-                person: widget.person,
-                onListProfessionalChanged: _updateCitizen)));
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        _openDetailsPerson(context);
+        Provider.of<ProfessionalProvider>(context, listen: false)
+            .setProfessional(widget.person);
+
+        Navigator.of(context).pushNamed("/professional-detail");
       },
       focusColor: ThemeColors.primaryFontColor,
       child: SizedBox(

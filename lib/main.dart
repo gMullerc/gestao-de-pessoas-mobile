@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_app/model/citizen.dart';
 import 'package:my_app/model/citizen_provider.dart';
 import 'package:my_app/model/person.dart';
+import 'package:my_app/model/professional_provider.dart';
 import 'package:my_app/screen/details_citizen.dart';
+import 'package:my_app/screen/details_professional.dart';
 import 'package:my_app/screen/home.dart';
 import 'package:my_app/themes/my_theme.dart';
 import 'package:my_app/themes/theme_colors.dart';
@@ -33,11 +35,15 @@ class GestaoDePessoas extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => CidadaoProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ProfessionalProvider(),
+        ),
       ],
       child: MaterialApp(
         routes: {
-          AppRoutes.home: (ctx) => const Home(),
+          AppRoutes.home: (ctx) => Home(),
           AppRoutes.citizenDetails: (ctx) => DetailsCitizen(),
+          AppRoutes.professionalDetails: (ctx) => DetailsProfessional(),
         },
         title: 'Gestão de pessoas',
         theme: myTheme,

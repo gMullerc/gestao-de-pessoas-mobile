@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/dialog_update/form_citizen_update.dart';
+import 'package:my_app/components/dialog_update/update_data_citizen/update_address.dart';
+import 'package:my_app/components/dialog_update/update_data_citizen/update_contact.dart';
+import 'package:my_app/components/dialog_update/update_data_citizen/update_person.dart';
 
 import 'package:my_app/model/citizen.dart';
 
@@ -7,7 +9,6 @@ import 'package:my_app/themes/theme_colors.dart';
 import 'package:provider/provider.dart';
 
 import '../../model/citizen_provider.dart';
-import 'form_person_update.dart';
 
 class DialogCitizenEdit extends StatefulWidget {
   const DialogCitizenEdit({
@@ -36,7 +37,9 @@ class _DialogCitizenEditState extends State<DialogCitizenEdit> {
                 Form(
                   key: _formKey,
                   child: Column(children: [
-                    FormPersonUpdate(),
+                    UpdateCitizenPerson(),
+                    UpdateCitizenContact(),
+                    UpdateCitizenAddress()
                   ]),
                 ),
                 const SizedBox(height: 16.0),

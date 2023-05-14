@@ -7,7 +7,8 @@ import '../../model/citizen_provider.dart';
 import '../../model/person.dart';
 
 class DetailsCitizenText extends StatelessWidget {
-  const DetailsCitizenText({Key? key}) : super(key: key);
+  const DetailsCitizenText({Key? key, required this.citizen}) : super(key: key);
+  final Citizen citizen;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class DetailsCitizenText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${citizenProvider.citizen.situacaoEscolar}',
+                          text: '${citizen.situacaoEscolar}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -56,7 +57,7 @@ class DetailsCitizenText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${citizenProvider.citizen.escolaridade}',
+                          text: '${citizen.escolaridade}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -86,7 +87,7 @@ class DetailsCitizenText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${citizenProvider.citizen.documentos.cpf}',
+                          text: '${citizen.documentos.cpf}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -108,7 +109,7 @@ class DetailsCitizenText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${citizenProvider.citizen.documentos.rg}',
+                          text: '${citizen.documentos.rg}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -138,8 +139,7 @@ class DetailsCitizenText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text:
-                              '${citizenProvider.citizen.documentos.certidaoDeNascimento}',
+                          text: '${citizen.documentos.certidaoDeNascimento}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),

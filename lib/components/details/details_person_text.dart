@@ -6,9 +6,8 @@ import '../../model/citizen_provider.dart';
 import '../../model/person.dart';
 
 class DetailsPersonText extends StatelessWidget {
-  const DetailsPersonText({
-    Key? key,
-  }) : super(key: key);
+  const DetailsPersonText({Key? key, required this.person}) : super(key: key);
+  final Person person;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class DetailsPersonText extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  cidadaoProvider.citizen.name,
+                  person.name,
                   style: TextStyle(
                       color: ThemeColors.primaryFontColor,
                       fontSize: 24,
@@ -50,7 +49,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${cidadaoProvider.citizen.dataDeNascimento}',
+                          text: '${person.dataDeNascimento}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -72,7 +71,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${cidadaoProvider.citizen.etnia}',
+                          text: '${person.etnia}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -102,7 +101,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${cidadaoProvider.citizen.genero}',
+                          text: '${person.genero}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -135,8 +134,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text:
-                              '${cidadaoProvider.citizen.endereco.logradouro}',
+                          text: '${person.endereco.logradouro}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -158,7 +156,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${cidadaoProvider.citizen.endereco.cep}',
+                          text: '${person.endereco.cep}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -188,7 +186,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${cidadaoProvider.citizen.endereco.bairro}',
+                          text: '${person.endereco.bairro}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -210,7 +208,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${cidadaoProvider.citizen.endereco.cidade}',
+                          text: '${person.endereco.cidade}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -240,7 +238,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${cidadaoProvider.citizen.endereco.pais}',
+                          text: '${person.endereco.pais}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -262,8 +260,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text:
-                              '${cidadaoProvider.citizen.endereco.complemento}',
+                          text: '${person.endereco.complemento}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -285,7 +282,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${cidadaoProvider.citizen.endereco.uf}',
+                          text: '${person.endereco.uf}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -315,7 +312,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${cidadaoProvider.citizen.contato.email}',
+                          text: '${person.contato.email}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -345,7 +342,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${cidadaoProvider.citizen.contato.telefone}',
+                          text: '${person.contato.telefone}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),
@@ -367,7 +364,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${cidadaoProvider.citizen.contato.celular}',
+                          text: '${person.contato.celular}',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),

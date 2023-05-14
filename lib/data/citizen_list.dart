@@ -3,6 +3,10 @@ import 'package:my_app/model/citizen.dart';
 import 'package:my_app/model/contact.dart';
 import 'package:my_app/model/documents.dart';
 
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
+
 var citizenList = [
   Citizen.attributes(
       "3",

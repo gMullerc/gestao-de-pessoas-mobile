@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/model/citizen.dart';
 import 'package:my_app/model/citizen_provider.dart';
-import 'package:my_app/model/person.dart';
-import 'package:my_app/model/professional.dart';
-import 'package:my_app/screen/details_citizen.dart';
+
 import 'package:my_app/themes/theme_colors.dart';
 import 'package:provider/provider.dart';
 
@@ -11,10 +9,8 @@ import 'card/card_image.dart';
 
 class CardCitizen extends StatefulWidget {
   final Citizen person;
-  final Function(Citizen, Citizen) onListCitizenUpdate;
-  CardCitizen(
-      {Key? key, required this.person, required this.onListCitizenUpdate})
-      : super(key: key);
+
+  CardCitizen({Key? key, required this.person}) : super(key: key);
 
   @override
   _CardCitizenState createState() => _CardCitizenState();
@@ -23,12 +19,6 @@ class CardCitizen extends StatefulWidget {
 class _CardCitizenState extends State<CardCitizen> {
   String _noSignUp(String value) {
     return value + " sem cadastro";
-  }
-
-  void _updateCitizen(Citizen value, Citizen oldValue) {
-    setState(() {
-      widget.onListCitizenUpdate(value, oldValue);
-    });
   }
 
   @override
@@ -53,7 +43,7 @@ class _CardCitizenState extends State<CardCitizen> {
               topRight: Radius.circular(25),
             ),
           ),
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
             child: Row(
               children: <Widget>[
@@ -62,7 +52,7 @@ class _CardCitizenState extends State<CardCitizen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      SizedBox(
                         height: 115,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
@@ -71,7 +61,7 @@ class _CardCitizenState extends State<CardCitizen> {
                           ),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: 95,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,7 +101,7 @@ class _CardCitizenState extends State<CardCitizen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Container(
+                      SizedBox(
                         height: 115,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 20, 15, 0),

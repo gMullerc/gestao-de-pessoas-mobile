@@ -4,35 +4,25 @@ import 'package:my_app/components/details/details_professional_text.dart';
 
 import 'package:my_app/components/dialog_update/dialog_professional.dart';
 
-import 'package:my_app/model/professional.dart';
+import 'package:my_app/model/professional_provider.dart';
 import 'package:my_app/themes/theme_colors.dart';
+import 'package:provider/provider.dart';
 
 import '../components/details/details_citizen_text.dart';
 
 class DetailsProfessional extends StatefulWidget {
-  const DetailsProfessional(
-      {Key? key, required this.person, required this.onListProfessionalChanged})
-      : super(key: key);
-  final Professional person;
-  final Function(Professional, Professional) onListProfessionalChanged;
+  DetailsProfessional({Key? key}) : super(key: key);
+
   @override
   State<DetailsProfessional> createState() => _DetailsProfessionalState();
 }
 
 class _DetailsProfessionalState extends State<DetailsProfessional> {
-  void _handleListProfessionalChanged(
-      Professional value, Professional oldValue) {
-    setState(() {
-      widget.onListProfessionalChanged(value, oldValue);
-    });
-
-    //widget.onEnderecoChanged(value);
-  }
-
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     double statusBarHeight = MediaQuery.of(context).padding.top + 16;
+    final professionalProvider = Provider.of<ProfessionalProvider>(context);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -40,14 +30,11 @@ class _DetailsProfessionalState extends State<DetailsProfessional> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return DialogProfessionalEdit(
-                  professionalData: widget.person,
-                  onListProfessionalChanged: _handleListProfessionalChanged,
-                );
+                return DialogProfessionalEdit();
               },
             );
           },
-          child: Icon(Icons.edit)),
+          child: const Icon(Icons.edit)),
       body: Container(
           color: ThemeColors.secondaryColor,
           height: mediaQuery.size.height,
@@ -77,7 +64,8 @@ class _DetailsProfessionalState extends State<DetailsProfessional> {
                       ),
                       SizedBox(
                           width: mediaQuery.size.width * 0.7,
-                          child: Text("Detalhar: ${widget.person.id}",
+                          child: Text(
+                              "Detalhar: ${professionalProvider.professional.id}",
                               maxLines: 1,
                               style: const TextStyle(
                                   fontSize: 30,
@@ -115,8 +103,8 @@ class _DetailsProfessionalState extends State<DetailsProfessional> {
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image:
-                                            AssetImage(widget.person.image))),
+                                        image: AssetImage(professionalProvider
+                                            .professional.image))),
                               ),
                             ),
                           ],
@@ -125,14 +113,10 @@ class _DetailsProfessionalState extends State<DetailsProfessional> {
                     ),
                   ]),
                 ),
-                Container(
-                  child: DetailsPersonText(),
-                ),
-                Container(
-                  child: DetailsCitizenText(),
-                ),
-                Container(
-                  child: DetailsProfessionalText(person: widget.person),
+                DetailsPersonText(person: professionalProvider.professional),
+                DetailsCitizenText(citizen: professionalProvider.professional),
+                DetailsProfessionalText(
+                  person: professionalProvider.professional,
                 ),
               ],
             ),
