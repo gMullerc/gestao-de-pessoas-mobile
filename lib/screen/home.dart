@@ -33,34 +33,9 @@ class _HomeState extends State<Home> {
     });
   }
 
-  void _updateCitizen(Citizen value, Citizen oldValue) {
-    setState(() {
-      Citizen cidadao =
-          _citizenList.firstWhere((element) => element == oldValue);
-
-      cidadao.name = value.name;
-
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${cidadao.documentos.cpf} atualizado')));
-    });
-  }
-
-  void _updateProfessional(Professional value, Professional oldValue) {
-    setState(() {
-      Professional professional =
-          _professionalList.firstWhere((element) => element == oldValue);
-
-      professional.name = value.name;
-
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${professional.documentos.cpf} atualizado')));
-    });
-  }
-
   void _handleListProfessionalChanged(Professional value) {
     setState(() {
       _professionalList.add(value);
-      print(value.cargo + value.remuneracao);
     });
     //widget.onEnderecoChanged(value);
   }
@@ -139,8 +114,7 @@ class _HomeState extends State<Home> {
                     _citizenList.removeAt(_citizenList.indexOf(citizen));
                   },
                   background: Container(color: Colors.red),
-                  child: CardCitizen(
-                      person: citizen, onListCitizenUpdate: _updateCitizen),
+                  child: CardCitizen(person: citizen),
                 );
               }, childCount: _citizenList.length),
             )
@@ -148,7 +122,6 @@ class _HomeState extends State<Home> {
             SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
                 final Professional professional = _professional.items[index];
-
                 return Dismissible(
                   key: Key(professional.id),
                   direction: DismissDirection.startToEnd,
@@ -156,11 +129,8 @@ class _HomeState extends State<Home> {
                     _professionalList
                         .removeAt(_professionalList.indexOf(professional));
                   },
-                  background:
-                      Container(color: Color.fromARGB(255, 112, 108, 108)),
-                  child: CardProfessional(
-                      person: professional,
-                      onListCitizenUpdate: _updateProfessional),
+                  background: Container(color: Colors.red),
+                  child: CardProfessional(person: professional),
                 );
               }, childCount: _professionalList.length),
             )
