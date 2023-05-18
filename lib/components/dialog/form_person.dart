@@ -18,11 +18,10 @@ class FormPerson extends StatefulWidget {
 
 class _FormPersonState extends State<FormPerson> {
   String etnia_id = "BRANCO";
-  List<String> _etnia = ["PRETO", "PARDO", "BRANCO"];
-  List<String> _genero = ["MASCULINO", "FEMININO", "NAOBINARIO"];
+  final List<String> _etnia = ["PRETO", "PARDO", "BRANCO"];
+  final List<String> _genero = ["MASCULINO", "FEMININO", "NAOBINARIO"];
   String? _selectedEtnia;
   String? _selectedGenero;
-  String? _dataDeNascimento;
 
   void _handleContactChanged(Contact value) {
     widget.citizen.contato = value;
@@ -33,7 +32,7 @@ class _FormPersonState extends State<FormPerson> {
   }
 
   String _invalidField(String value) {
-    return value + " é necessário";
+    return "$value é necessário";
   }
 
   @override
@@ -41,126 +40,156 @@ class _FormPersonState extends State<FormPerson> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Column(children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Nome',
-                    labelStyle: TextStyle(color: Colors.amber),
-                  ),
-                  validator: (value) {
-                    if (value == null || value == "") {
-                      return _invalidField("Nome");
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    setState(() {
-                      widget.citizen.name = value!;
-                    });
-                  },
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Data de nascimento',
-                    hintText: "DD/mm/YYYY",
-                    labelStyle: TextStyle(color: Colors.amber),
-                  ),
-                  validator: (value) {
-                    if (value == null || value == "") {
-                      return _invalidField("Data de nascimento");
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    setState(() {
-                      widget.citizen.dataDeNascimento = value!;
-                    });
-                  },
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: DropdownButtonFormField<String>(
-                    dropdownColor: ThemeColors.secondaryColor,
-                    value: _selectedEtnia,
-                    items: _etnia.map((String item) {
-                      return DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: TextStyle(color: Colors.amber),
+        Card(
+          shadowColor: ThemeColors.shadowColors,
+          elevation: 4,
+          margin: const EdgeInsets.all(8),
+          color: ThemeColors.secondaryColor,
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      child: TextFormField(
+                        style: const TextStyle(
+                            color: ThemeColors.primaryFontColor, fontSize: 18),
+                        decoration: const InputDecoration(
+                          labelText: 'Nome',
+                          labelStyle: TextStyle(color: ThemeColors.detailColor),
                         ),
-                      );
-                    }).toList(),
-                    hint: Text("Etnia", style: TextStyle(color: Colors.amber)),
-                    validator: (value) {
-                      if (value == null) {
-                        return _invalidField("Etnia");
-                      }
-                    },
-                    onChanged: (String? selectedItem) {
-                      setState(() {
-                        _selectedEtnia = selectedItem;
-
-                        widget.citizen.etnia = _selectedEtnia!;
-                        print(widget.citizen.etnia);
-                      });
-                    }),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: DropdownButtonFormField<String>(
-                    dropdownColor: ThemeColors.secondaryColor,
-                    value: _selectedGenero,
-                    items: _genero.map((String item) {
-                      return DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: TextStyle(color: Colors.amber),
-                        ),
-                      );
-                    }).toList(),
-                    hint: Text(
-                      "Gênero",
-                      style: TextStyle(color: Colors.amber),
-                      overflow: TextOverflow.fade,
+                        validator: (value) {
+                          if (value == null || value == "") {
+                            return _invalidField("Nome");
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          setState(() {
+                            widget.citizen.name = value!;
+                          });
+                        },
+                      ),
                     ),
-                    validator: (value) {
-                      if (value == null) {
-                        return _invalidField("Gênero");
-                      }
-                    },
-                    onChanged: (String? selectedItem) {
-                      setState(() {
-                        _selectedGenero = selectedItem;
-                        widget.citizen.genero = _selectedGenero!;
-                        print(widget.citizen.genero);
-                      });
-                    }),
-              ),
-            ],
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      child: TextFormField(
+                        style: const TextStyle(
+                            color: ThemeColors.primaryFontColor, fontSize: 18),
+                        decoration: const InputDecoration(
+                          labelText: 'Data de nascimento',
+                          hintText: "DD/mm/YYYY",
+                          labelStyle: TextStyle(color: ThemeColors.detailColor),
+                        ),
+                        validator: (value) {
+                          if (value == null || value == "") {
+                            return _invalidField("Data de nascimento");
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          setState(() {
+                            widget.citizen.dataDeNascimento = value!;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: DropdownButtonFormField<String>(
+                          dropdownColor: ThemeColors.secondaryColor,
+                          value: _selectedEtnia,
+                          items: _etnia.map((String item) {
+                            return DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                    color: ThemeColors.detailColor),
+                              ),
+                            );
+                          }).toList(),
+                          hint: const Text("Etnia",
+                              style: TextStyle(color: ThemeColors.detailColor)),
+                          validator: (value) {
+                            if (value == null) {
+                              return _invalidField("Etnia");
+                            }
+                          },
+                          onChanged: (String? selectedItem) {
+                            setState(() {
+                              _selectedEtnia = selectedItem;
+
+                              widget.citizen.etnia = _selectedEtnia!;
+                            });
+                          }),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: DropdownButtonFormField<String>(
+                          dropdownColor: ThemeColors.secondaryColor,
+                          value: _selectedGenero,
+                          items: _genero.map((String item) {
+                            return DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                    color: ThemeColors.detailColor),
+                              ),
+                            );
+                          }).toList(),
+                          hint: const Text(
+                            "Gênero",
+                            style: TextStyle(color: ThemeColors.detailColor),
+                            overflow: TextOverflow.fade,
+                          ),
+                          validator: (value) {
+                            if (value == null) {
+                              return _invalidField("Gênero");
+                            }
+                          },
+                          onChanged: (String? selectedItem) {
+                            setState(() {
+                              _selectedGenero = selectedItem;
+                              widget.citizen.genero = _selectedGenero!;
+                              print(widget.citizen.genero);
+                            });
+                          }),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          FormAddress(
-            onAddressChanged: _handleAdressChanged,
-          ),
-          FormContact(
-            onContactChanged: _handleContactChanged,
-          ),
-        ]),
+        ),
+        Column(
+          children: [
+            FormAddress(
+              onAddressChanged: _handleAdressChanged,
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            FormContact(
+              onContactChanged: _handleContactChanged,
+            ),
+          ],
+        )
       ],
     );
   }

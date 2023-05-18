@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/card_citizen.dart';
-import 'package:my_app/components/card_professional.dart';
+import 'package:my_app/components/card/card_citizen.dart';
+import 'package:my_app/components/card/card_professional.dart';
 import 'package:my_app/data/citizen_list.dart';
 import 'package:my_app/data/professional_list.dart';
 import 'package:my_app/model/citizen.dart';
@@ -14,17 +14,14 @@ import '../components/dialog/dialog_citizen.dart';
 import '../components/dialog/dialog_professional.dart';
 import '../model/citizen_list.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class OverView extends StatefulWidget {
+  const OverView({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<OverView> createState() => _OverViewState();
 }
 
-class _HomeState extends State<Home> {
-  final _citizenList = citizenList;
-  final _professionalList = professionalList;
-
+class _OverViewState extends State<OverView> {
   int _isCidadidadaoOrProfessional = 0;
 
   _selectView(int value) {
@@ -34,16 +31,25 @@ class _HomeState extends State<Home> {
   }
 
   void _handleListProfessionalChanged(Professional value) {
-    setState(() {
-      _professionalList.add(value);
-    });
+    setState(() {});
     //widget.onEnderecoChanged(value);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    var teste = Provider.of<CitizenList>(
+      context,
+      listen: false,
+    ).loadCitizen();
+    print('object');
   }
 
   @override
   Widget build(BuildContext context) {
     final CitizenList _citizen = Provider.of(context);
     final ProfessionalList _professional = Provider.of(context);
+
     return Scaffold(
       backgroundColor: ThemeColors.primaryColor,
       floatingActionButton: FloatingActionButton(
@@ -53,7 +59,7 @@ class _HomeState extends State<Home> {
             builder: (BuildContext context) {
               if (_isCidadidadaoOrProfessional == 0) {
                 return ChangeNotifierProvider(
-                    create: (_) => Citizen(), child: DialogCitizen());
+                    create: (_) => Citizen(), child: const DialogCitizen());
               } else {
                 return DialogProfessional(
                   onListProfessionalChanged: _handleListProfessionalChanged,
@@ -108,31 +114,30 @@ class _HomeState extends State<Home> {
               delegate: SliverChildBuilderDelegate((context, index) {
                 final Citizen citizen = _citizen.items[index];
                 return Dismissible(
-                  key: Key(citizen.id),
+                  key: Key(citizen.id.toString()),
                   direction: DismissDirection.startToEnd,
                   onDismissed: (direction) {
-                    _citizenList.removeAt(_citizenList.indexOf(citizen));
+                    _citizen.removeItem(_citizen.items[index]);
                   },
                   background: Container(color: Colors.red),
                   child: CardCitizen(person: citizen),
                 );
-              }, childCount: _citizenList.length),
+              }, childCount: _citizen.items.length),
             )
           else
             SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
                 final Professional professional = _professional.items[index];
                 return Dismissible(
-                  key: Key(professional.id),
+                  key: Key(professional.id.toString()),
                   direction: DismissDirection.startToEnd,
                   onDismissed: (direction) {
-                    _professionalList
-                        .removeAt(_professionalList.indexOf(professional));
+                    //_professional.removeItem(_professional.items[index]);
                   },
                   background: Container(color: Colors.red),
                   child: CardProfessional(person: professional),
                 );
-              }, childCount: _professionalList.length),
+              }, childCount: _professional.items.length),
             )
         ],
       ),

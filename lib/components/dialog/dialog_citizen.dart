@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/components/dialog/form_citizen.dart';
+import 'package:my_app/components/dialog/form_image.dart';
+import 'package:my_app/components/dialog/form_imageLoad.dart';
 import 'package:my_app/components/dialog/form_person.dart';
 
 import 'package:my_app/model/citizen.dart';
@@ -34,6 +36,7 @@ class _DialogCitizenState extends State<DialogCitizen> {
                 Form(
                   key: _formKey,
                   child: Column(children: [
+                    FormImageLoad(person: newCitizen),
                     FormPerson(citizen: newCitizen),
                     FormCitizen(citizen: newCitizen),
                   ]),
@@ -52,7 +55,7 @@ class _DialogCitizenState extends State<DialogCitizen> {
                         _formKey.currentState?.save();
 
                         citizen.addCitizen(newCitizen);
-                        Navigator.pop(context);
+                        //  Navigator.pop(context);
                       }
                     },
                     child: const Text('Cadastrar'),

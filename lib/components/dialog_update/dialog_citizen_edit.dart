@@ -3,7 +3,7 @@ import 'package:my_app/components/dialog_update/update_data_citizen/update_addre
 import 'package:my_app/components/dialog_update/update_data_citizen/update_contact.dart';
 import 'package:my_app/components/dialog_update/update_data_citizen/update_person.dart';
 
-import 'package:my_app/model/citizen.dart';
+import 'package:my_app/model/citizen_list.dart';
 
 import 'package:my_app/themes/theme_colors.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +25,7 @@ class _DialogCitizenEditState extends State<DialogCitizenEdit> {
   @override
   Widget build(BuildContext context) {
     final citizenProvider = Provider.of<CidadaoProvider>(context);
+    final citizenList = Provider.of<CitizenList>(context);
     return Dialog.fullscreen(
       backgroundColor: ThemeColors.primaryColor,
       child: Container(
@@ -54,7 +55,7 @@ class _DialogCitizenEditState extends State<DialogCitizenEdit> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState?.save();
-                        citizenProvider.updateCitizen(citizenProvider.citizen);
+                        citizenList.updateCitizen(citizenProvider.citizen);
                         Navigator.pop(context);
                       }
                     },

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/model/citizen.dart';
 import 'package:my_app/model/citizen_provider.dart';
-import 'package:my_app/model/person.dart';
 import 'package:my_app/model/professional_provider.dart';
 import 'package:my_app/screen/details_citizen.dart';
 import 'package:my_app/screen/details_professional.dart';
-import 'package:my_app/screen/home.dart';
+import 'package:my_app/screen/overview.dart';
+
 import 'package:my_app/themes/my_theme.dart';
 import 'package:my_app/themes/theme_colors.dart';
 import 'package:my_app/utils/app_routes.dart';
@@ -41,7 +40,7 @@ class GestaoDePessoas extends StatelessWidget {
       ],
       child: MaterialApp(
         routes: {
-          AppRoutes.home: (ctx) => Home(),
+          AppRoutes.overview: (ctx) => const OverView(),
           AppRoutes.citizenDetails: (ctx) => DetailsCitizen(),
           AppRoutes.professionalDetails: (ctx) => DetailsProfessional(),
         },

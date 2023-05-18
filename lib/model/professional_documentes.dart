@@ -1,6 +1,6 @@
 class ProfessionalDocuments {
-  late String _pis = "";
-  late String _carteiraDeTrabalho = "";
+  late String _pis;
+  late String _carteiraDeTrabalho;
 
   ProfessionalDocuments();
   ProfessionalDocuments.attributes(this._pis, this._carteiraDeTrabalho);

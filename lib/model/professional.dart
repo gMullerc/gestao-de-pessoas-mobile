@@ -5,59 +5,38 @@ import 'package:my_app/model/documents.dart';
 import 'package:my_app/model/professional_documentes.dart';
 
 class Professional extends Citizen {
-  late String? _cargo = "";
-  late String? _remuneracao = "";
-  late String? _tipoDeProfissional = "";
-  late ProfessionalDocuments? _professionalDocuments;
+  late String cargo;
+  late String remuneracao;
+  late String tipoDeProfissional;
+  late ProfessionalDocuments professionalDocuments;
 
   Professional();
   Professional.attributes(
-      String _id,
-      String _name,
-      String _dataDeNascimento,
-      String _etnia,
-      String _genero,
-      Contact _contato,
-      Address _endereco,
-      String _image,
-      String _situacaoEscolar,
-      Documents _documentos,
-      String _escolaridade,
-      this._cargo,
-      this._remuneracao,
-      this._tipoDeProfissional,
-      this._professionalDocuments)
+      {required int id,
+      required String name,
+      required String dataDeNascimento,
+      required String etnia,
+      required String genero,
+      required Contact contato,
+      required Address endereco,
+      required String imagem,
+      required String situacaoEscolar,
+      required Documents documentos,
+      required String escolaridade,
+      required this.cargo,
+      required this.remuneracao,
+      required this.tipoDeProfissional,
+      required this.professionalDocuments})
       : super.attributes(
-            _id,
-            _name,
-            _dataDeNascimento,
-            _etnia,
-            _genero,
-            _contato,
-            _endereco,
-            _image,
-            _situacaoEscolar,
-            _documentos,
-            _escolaridade);
-
-  set cargo(String value) {
-    _cargo = value;
-  }
-
-  set remuneracao(String value) {
-    _remuneracao = value;
-  }
-
-  set tipoDeProfissional(String value) {
-    _tipoDeProfissional = value;
-  }
-
-  set professionalDocuments(ProfessionalDocuments value) {
-    _professionalDocuments = value;
-  }
-
-  String get cargo => _cargo!;
-  String get remuneracao => _remuneracao!;
-  String get tipoDeProfissional => _tipoDeProfissional!;
-  ProfessionalDocuments get professionalDocuments => _professionalDocuments!;
+            id: id,
+            name: name,
+            dataDeNascimento: dataDeNascimento,
+            etnia: etnia,
+            genero: genero,
+            contato: contato,
+            endereco: endereco,
+            imagem: imagem,
+            situacaoEscolar: situacaoEscolar,
+            documentos: documentos,
+            escolaridade: escolaridade);
 }

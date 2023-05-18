@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 class CardImage extends StatelessWidget {
@@ -6,7 +8,7 @@ class CardImage extends StatelessWidget {
     required this.image,
   });
 
-  final String image;
+  final Uint8List image;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,10 @@ class CardImage extends StatelessWidget {
             width: 85,
             height: 85,
             decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    fit: BoxFit.cover, image: AssetImage(image))),
+              shape: BoxShape.circle,
+              image:
+                  DecorationImage(image: MemoryImage(image), fit: BoxFit.cover),
+            ),
           ),
         ));
   }

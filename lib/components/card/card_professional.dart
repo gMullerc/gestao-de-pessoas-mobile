@@ -1,34 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/model/citizen.dart';
-import 'package:my_app/model/citizen_provider.dart';
-
+import 'package:my_app/model/professional.dart';
+import 'package:my_app/model/professional_provider.dart';
 import 'package:my_app/themes/theme_colors.dart';
 import 'package:provider/provider.dart';
 
-import 'card/card_image.dart';
+import 'card_image.dart';
 
-class CardCitizen extends StatefulWidget {
-  final Citizen person;
+class CardProfessional extends StatefulWidget {
+  final Professional person;
 
-  CardCitizen({Key? key, required this.person}) : super(key: key);
+  CardProfessional({Key? key, required this.person}) : super(key: key);
 
   @override
-  _CardCitizenState createState() => _CardCitizenState();
+  _CardProfessionalState createState() => _CardProfessionalState();
 }
 
-class _CardCitizenState extends State<CardCitizen> {
-  String _noSignUp(String value) {
-    return value + " sem cadastro";
-  }
-
+class _CardProfessionalState extends State<CardProfessional> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Provider.of<CidadaoProvider>(context, listen: false)
-            .setCidadao(widget.person);
+        Provider.of<ProfessionalProvider>(context, listen: false)
+            .setProfessional(widget.person);
 
-        Navigator.of(context).pushNamed("/citizen-detail");
+        Navigator.of(context).pushNamed("/professional-detail");
       },
       focusColor: ThemeColors.primaryFontColor,
       child: SizedBox(
@@ -43,7 +38,7 @@ class _CardCitizenState extends State<CardCitizen> {
               topRight: Radius.circular(25),
             ),
           ),
-          child: SizedBox(
+          child: Container(
             width: MediaQuery.of(context).size.width * 0.9,
             child: Row(
               children: <Widget>[
@@ -52,16 +47,16 @@ class _CardCitizenState extends State<CardCitizen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      Container(
                         height: 115,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                          child: CardImage(
-                            image: widget.person.image,
-                          ),
+                          /*child: CardImage(
+                            image: widget.person.imagem,
+                          ),*/
                         ),
                       ),
-                      SizedBox(
+                      Container(
                         height: 95,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +65,7 @@ class _CardCitizenState extends State<CardCitizen> {
                               padding: const EdgeInsets.fromLTRB(20, 10, 0, 5),
                               child: Text(
                                 widget.person.name,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: ThemeColors.primaryFontColor,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
@@ -82,7 +77,7 @@ class _CardCitizenState extends State<CardCitizen> {
                               padding: const EdgeInsets.fromLTRB(20, 5, 0, 5),
                               child: Text(
                                 widget.person.documentos.cpf,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: ThemeColors.primaryFontColor,
                                     fontSize: 13,
                                     fontWeight: FontWeight.bold),
@@ -101,7 +96,7 @@ class _CardCitizenState extends State<CardCitizen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      SizedBox(
+                      Container(
                         height: 115,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 20, 15, 0),
@@ -109,7 +104,7 @@ class _CardCitizenState extends State<CardCitizen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Divider(
+                              const Divider(
                                 color: ThemeColors.materialPrimaryColors,
                                 thickness: 1.5,
                               ),
@@ -117,7 +112,7 @@ class _CardCitizenState extends State<CardCitizen> {
                                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                                 child: Text(
                                   widget.person.contato.email,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: ThemeColors.primaryFontColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold),
@@ -129,7 +124,7 @@ class _CardCitizenState extends State<CardCitizen> {
                                 padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
                                 child: Text(
                                   widget.person.contato.celular,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: ThemeColors.primaryFontColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold),
@@ -141,7 +136,43 @@ class _CardCitizenState extends State<CardCitizen> {
                                 padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
                                 child: Text(
                                   widget.person.contato.telefone,
-                                  style: TextStyle(
+                                  style: const TextStyle(
+                                      color: ThemeColors.primaryFontColor,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 90,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 20, 15, 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: Text(
+                                  widget.person.cargo,
+                                  style: const TextStyle(
+                                      color: ThemeColors.primaryFontColor,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
+                                child: Text(
+                                  widget.person.tipoDeProfissional,
+                                  style: const TextStyle(
                                       color: ThemeColors.primaryFontColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold),

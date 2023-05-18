@@ -9,31 +9,34 @@ class ProfessionalList with ChangeNotifier {
 
   List<Professional> get items => [..._items];
 
-  void addCitizen(Professional citizen) {
+  /*void addCitizen(Professional citizen) {
     _items.insert(
       0,
       Professional.attributes(
-          Random().nextDouble().toString(),
-          citizen.name,
-          citizen.dataDeNascimento,
-          citizen.genero,
-          citizen.etnia,
-          citizen.contato,
-          citizen.endereco,
-          citizen.image,
-          citizen.escolaridade,
-          citizen.documentos,
-          citizen.situacaoEscolar,
-          citizen.cargo,
-          citizen.remuneracao,
-          citizen.tipoDeProfissional,
-          citizen.professionalDocuments),
+          id: Random().nextInt(100),
+          name: citizen.name,
+          dataDeNascimento: citizen.dataDeNascimento,
+          genero: citizen.genero,
+          etnia: citizen.etnia,
+          contato:  citizen.contato,
+          endereco: citizen.endereco,
+          image: citizen.image,
+          escolaridade: citizen.escolaridade,
+          documentos: citizen.documentos,
+          situacaoEscolar: citizen.situacaoEscolar,
+          cargo: citizen.cargo,
+          remuneracao: citizen.remuneracao,
+          tipoDeProfissional: citizen.tipoDeProfissional,
+          professionalDocuments: citizen.professionalDocuments),
     );
     notifyListeners();
-  }
+  }*/
 
-  void removeItem(String professionalId) {
-    _items.remove(professionalId);
+  /* void removeItem(Professional professional) {
+    if (_items.contains(professional)) {
+      _items.remove(professional);
+    }
+
     notifyListeners();
-  }
+  }*/
 }

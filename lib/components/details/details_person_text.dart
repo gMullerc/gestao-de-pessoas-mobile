@@ -238,7 +238,7 @@ class DetailsPersonText extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${person.endereco.pais}',
+                          text: '  ',
                           style: TextStyle(
                             color: Colors.amberAccent,
                           ),

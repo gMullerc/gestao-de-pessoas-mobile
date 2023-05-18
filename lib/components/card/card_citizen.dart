@@ -1,29 +1,38 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_app/model/professional.dart';
-import 'package:my_app/model/professional_provider.dart';
-import 'package:my_app/themes/theme_colors.dart';
+import 'package:my_app/utils/image_decode.dart';
 import 'package:provider/provider.dart';
 
-import 'card/card_image.dart';
+import '../../model/citizen.dart';
+import '../../model/citizen_provider.dart';
+import '../../themes/theme_colors.dart';
+import 'card_image.dart';
 
-class CardProfessional extends StatefulWidget {
-  final Professional person;
+class CardCitizen extends StatefulWidget {
+  final Citizen person;
 
-  CardProfessional({Key? key, required this.person}) : super(key: key);
+  CardCitizen({Key? key, required this.person}) : super(key: key);
 
   @override
-  _CardProfessionalState createState() => _CardProfessionalState();
+  _CardCitizenState createState() => _CardCitizenState();
 }
 
-class _CardProfessionalState extends State<CardProfessional> {
+class _CardCitizenState extends State<CardCitizen> {
+  String _noSignUp(String value) {
+    return value + " sem cadastro";
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Provider.of<ProfessionalProvider>(context, listen: false)
-            .setProfessional(widget.person);
+        Provider.of<CidadaoProvider>(context, listen: false)
+            .setCidadao(widget.person);
 
-        Navigator.of(context).pushNamed("/professional-detail");
+        Navigator.of(context).pushNamed("/citizen-detail");
       },
       focusColor: ThemeColors.primaryFontColor,
       child: SizedBox(
@@ -38,7 +47,7 @@ class _CardProfessionalState extends State<CardProfessional> {
               topRight: Radius.circular(25),
             ),
           ),
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
             child: Row(
               children: <Widget>[
@@ -47,16 +56,17 @@ class _CardProfessionalState extends State<CardProfessional> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      SizedBox(
                         height: 115,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
                           child: CardImage(
-                            image: widget.person.image,
+                            image:
+                                ImageDecode.imageConvert(widget.person.imagem),
                           ),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: 95,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +75,7 @@ class _CardProfessionalState extends State<CardProfessional> {
                               padding: const EdgeInsets.fromLTRB(20, 10, 0, 5),
                               child: Text(
                                 widget.person.name,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: ThemeColors.primaryFontColor,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
@@ -77,7 +87,7 @@ class _CardProfessionalState extends State<CardProfessional> {
                               padding: const EdgeInsets.fromLTRB(20, 5, 0, 5),
                               child: Text(
                                 widget.person.documentos.cpf,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: ThemeColors.primaryFontColor,
                                     fontSize: 13,
                                     fontWeight: FontWeight.bold),
@@ -96,7 +106,7 @@ class _CardProfessionalState extends State<CardProfessional> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Container(
+                      SizedBox(
                         height: 115,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 20, 15, 0),
@@ -104,7 +114,7 @@ class _CardProfessionalState extends State<CardProfessional> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              const Divider(
+                              Divider(
                                 color: ThemeColors.materialPrimaryColors,
                                 thickness: 1.5,
                               ),
@@ -112,7 +122,7 @@ class _CardProfessionalState extends State<CardProfessional> {
                                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                                 child: Text(
                                   widget.person.contato.email,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: ThemeColors.primaryFontColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold),
@@ -124,7 +134,7 @@ class _CardProfessionalState extends State<CardProfessional> {
                                 padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
                                 child: Text(
                                   widget.person.contato.celular,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: ThemeColors.primaryFontColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold),
@@ -136,43 +146,7 @@ class _CardProfessionalState extends State<CardProfessional> {
                                 padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
                                 child: Text(
                                   widget.person.contato.telefone,
-                                  style: const TextStyle(
-                                      color: ThemeColors.primaryFontColor,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 90,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 20, 15, 0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                child: Text(
-                                  widget.person.cargo,
-                                  style: const TextStyle(
-                                      color: ThemeColors.primaryFontColor,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
-                                child: Text(
-                                  widget.person.tipoDeProfissional,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: ThemeColors.primaryFontColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold),

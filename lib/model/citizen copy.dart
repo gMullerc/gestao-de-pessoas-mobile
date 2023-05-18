@@ -4,13 +4,13 @@ import 'address.dart';
 import 'contact.dart';
 import 'documents.dart';
 
-class Citizen extends Person {
+class Citizenn extends Person {
   late String situacaoEscolar = "";
   late String escolaridade = "";
   late Documents documentos;
 
-  Citizen();
-  Citizen.attributes(
+  Citizenn();
+  Citizenn.attributes(
       {required int id,
       required String name,
       required String dataDeNascimento,

@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 import '../components/details/details_citizen_text.dart';
 
 class DetailsProfessional extends StatefulWidget {
-  DetailsProfessional({Key? key}) : super(key: key);
+  const DetailsProfessional({Key? key}) : super(key: key);
 
   @override
   State<DetailsProfessional> createState() => _DetailsProfessionalState();
@@ -30,7 +30,7 @@ class _DetailsProfessionalState extends State<DetailsProfessional> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return DialogProfessionalEdit();
+                return const DialogProfessionalEdit();
               },
             );
           },
@@ -104,7 +104,7 @@ class _DetailsProfessionalState extends State<DetailsProfessional> {
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
                                         image: AssetImage(professionalProvider
-                                            .professional.image))),
+                                            .professional.imagem))),
                               ),
                             ),
                           ],
