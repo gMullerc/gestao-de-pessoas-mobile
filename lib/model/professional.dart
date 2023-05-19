@@ -2,7 +2,7 @@ import 'package:my_app/model/address.dart';
 import 'package:my_app/model/citizen.dart';
 import 'package:my_app/model/contact.dart';
 import 'package:my_app/model/documents.dart';
-import 'package:my_app/model/professional_documentes.dart';
+import 'package:my_app/model/professional_documents.dart';
 
 class Professional extends Citizen {
   late String cargo;

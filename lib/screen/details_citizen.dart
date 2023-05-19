@@ -19,9 +19,7 @@ class DetailsCitizen extends StatefulWidget {
 class _DetailsCitizenState extends State<DetailsCitizen> {
   @override
   void initState() {
-    // TODO: implement initState
-    final cidadaoProvider =
-        Provider.of<CitizenList>(context, listen: false).loadCitizen();
+    Provider.of<CitizenList>(context, listen: false).loadCitizen();
   }
 
   @override

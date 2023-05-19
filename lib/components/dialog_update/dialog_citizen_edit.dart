@@ -55,6 +55,8 @@ class _DialogCitizenEditState extends State<DialogCitizenEdit> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState?.save();
+                        print('entrando no emtodo');
+                        print(citizenProvider.citizen.imagem);
                         citizenList.updateCitizen(citizenProvider.citizen);
                         Navigator.pop(context);
                       }

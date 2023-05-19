@@ -41,8 +41,8 @@ class GestaoDePessoas extends StatelessWidget {
       child: MaterialApp(
         routes: {
           AppRoutes.overview: (ctx) => const OverView(),
-          AppRoutes.citizenDetails: (ctx) => DetailsCitizen(),
-          AppRoutes.professionalDetails: (ctx) => DetailsProfessional(),
+          AppRoutes.citizenDetails: (ctx) => const DetailsCitizen(),
+          AppRoutes.professionalDetails: (ctx) => const DetailsProfessional(),
         },
         title: 'Gestão de pessoas',
         theme: myTheme,

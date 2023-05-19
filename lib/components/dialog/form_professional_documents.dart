@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/model/documents.dart';
-import 'package:my_app/model/professional_documentes.dart';
+import 'package:my_app/model/professional_documents.dart';
 
 class FormProfessionalDocuments extends StatefulWidget {
   const FormProfessionalDocuments({super.key, required this.onContactChanged});
@@ -48,7 +48,7 @@ class _FormProfessionalDocumentsState extends State<FormProfessionalDocuments> {
                     });
                   },
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'Carteira de trabalho',
                       hintText: "000.000.000-00",
                       labelStyle: TextStyle(color: Colors.amber)),
@@ -69,7 +69,7 @@ class _FormProfessionalDocumentsState extends State<FormProfessionalDocuments> {
                       _handleEnderecoChanged(_documents);
                     });
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'PIS',
                       hintText: "00.000.000-0",
                       labelStyle: TextStyle(color: Colors.amber)),

@@ -4,7 +4,7 @@ import 'package:my_app/components/dialog/form_professional_documents.dart';
 import 'package:my_app/model/citizen.dart';
 import 'package:my_app/model/documents.dart';
 import 'package:my_app/model/professional.dart';
-import 'package:my_app/model/professional_documentes.dart';
+import 'package:my_app/model/professional_documents.dart';
 import 'package:my_app/themes/theme_colors.dart';
 
 class FormProfessional extends StatefulWidget {
